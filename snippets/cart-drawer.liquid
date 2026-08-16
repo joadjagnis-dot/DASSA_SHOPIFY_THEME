@@ -1,0 +1,30 @@
+<div class="cart-drawer-overlay hidden" data-cart-overlay></div>
+<aside class="cart-drawer hidden" data-cart-drawer data-testid="cart-drawer" data-free-shipping-threshold="{{ settings.free_shipping_threshold | default: 40 | times: 100 }}">
+  <div class="cart-drawer-head">
+    <h2>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8322A" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      {{ 'general.cart.title' | t }}
+    </h2>
+    <button class="cart-close" data-cart-close aria-label="Fermer">✕</button>
+  </div>
+  <div class="cart-shipping-bar" data-shipping-bar>
+    <p data-shipping-message></p>
+    <div class="shipping-track"><div class="shipping-progress" data-shipping-progress></div></div>
+  </div>
+  <div class="cart-drawer-items" data-cart-items></div>
+  <div class="cart-drawer-empty hidden" data-cart-empty>
+    <p class="cart-empty-title">{{ 'general.cart.empty' | t }}</p>
+    <a href="/#nos-boissons" class="btn btn-red" data-cart-close>{{ 'general.cart.continue' | t }}</a>
+  </div>
+  <div class="cart-drawer-foot" data-cart-foot>
+    <div class="cart-row">
+      <span>{{ 'general.cart.shipping' | t }}</span>
+      <span data-shipping-label>{{ 'general.cart.shipping_at_checkout' | t }}</span>
+    </div>
+    <div class="cart-row cart-row-total">
+      <span>{{ 'general.cart.total' | t }}</span>
+      <span class="cart-total" data-cart-total data-testid="cart-total"></span>
+    </div>
+    <a href="{{ routes.cart_url }}/checkout" class="btn btn-red btn-full" data-testid="cart-checkout-btn">{{ 'general.cart.checkout' | t }} →</a>
+  </div>
+</aside>

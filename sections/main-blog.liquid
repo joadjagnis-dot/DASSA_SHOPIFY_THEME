@@ -1,0 +1,25 @@
+<section class="page-section">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h1 class="section-title">{{ blog.title }}</h1>
+    </div>
+    <div class="blog-grid">
+      {% paginate blog.articles by 9 %}
+        {% for article in blog.articles %}
+          <a href="{{ article.url }}" class="collection-card">
+            {% if article.image %}
+              <img src="{{ article.image | image_url: width: 500 }}" alt="{{ article.title | escape }}" loading="lazy" width="500" height="300">
+            {% endif %}
+            <h3>{{ article.title }}</h3>
+            <p class="collection-price">{{ article.published_at | date: "%d %B %Y" }}</p>
+          </a>
+        {% endfor %}
+        {% if paginate.pages > 1 %}<div class="pagination">{{ paginate | default_pagination }}</div>{% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

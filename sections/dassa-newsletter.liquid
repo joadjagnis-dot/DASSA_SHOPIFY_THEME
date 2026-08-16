@@ -1,0 +1,35 @@
+<section class="newsletter-section grain">
+  <div class="container-narrow newsletter-inner reveal-on-scroll">
+    <p class="newsletter-script">{{ section.settings.script_text }}</p>
+    <h2 class="newsletter-title">{{ section.settings.title }}</h2>
+    <p class="newsletter-text">{{ section.settings.text }}</p>
+    {% form 'customer', class: 'newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {% if form.posted_successfully? %}
+        <p class="newsletter-success" data-testid="newsletter-success">{{ 'general.newsletter.success' | t }}</p>
+      {% else %}
+        <div class="newsletter-fields">
+          <input type="email" name="contact[email]" required placeholder="{{ section.settings.placeholder }}" class="newsletter-input" data-testid="newsletter-email-input" value="{{ form.email }}">
+          <button type="submit" class="btn btn-dark" data-testid="newsletter-submit-btn">{{ section.settings.cta_label }}</button>
+        </div>
+        {% if form.errors %}
+          <p class="newsletter-error">Adresse courriel invalide. Veuillez réessayer.</p>
+        {% endif %}
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Infolettre DASSA",
+  "settings": [
+    { "type": "text", "id": "script_text", "label": "Texte manuscrit", "default": "Restez pétillant ✺" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Entrez dans l'univers DASSA." },
+    { "type": "text", "id": "text", "label": "Texte", "default": "Recevez nos nouveautés, recettes, nouveaux points de vente et offres exclusives." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder du champ", "default": "Votre adresse courriel" },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Je m'inscris" }
+  ],
+  "presets": [{ "name": "Infolettre DASSA" }]
+}
+{% endschema %}

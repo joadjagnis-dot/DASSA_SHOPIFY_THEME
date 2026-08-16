@@ -1,0 +1,26 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "DASSA",
+    "theme_version": "1.0.0",
+    "theme_author": "DASSA",
+    "theme_documentation_url": "https://github.com",
+    "theme_support_url": "https://github.com"
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "color_red", "label": "Rouge hibiscus", "default": "#B8322A" },
+      { "type": "color", "id": "color_green", "label": "Vert menthe", "default": "#5F8A4C" },
+      { "type": "color", "id": "color_orange", "label": "Orange ananas", "default": "#F6A623" },
+      { "type": "color", "id": "color_cream", "label": "Blanc crème", "default": "#FFF7ED" },
+      { "type": "color", "id": "color_brown", "label": "Brun foncé", "default": "#2C211D" }
+    ]
+  },
+  {
+    "name": "Livraison",
+    "settings": [
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil livraison gratuite ($)", "default": 40 }
+    ]
+  }
+]

@@ -1,0 +1,71 @@
+<header class="dassa-header">
+  {% if section.settings.show_announcement %}
+    <div class="announcement-bar" data-testid="announcement-bar">{{ section.settings.announcement_text }}</div>
+  {% endif %}
+  <nav class="main-nav" data-nav>
+    <div class="nav-inner">
+      <a href="{{ routes.root_url }}" class="nav-logo" data-testid="nav-logo">
+        <span class="nav-logo-script">{{ section.settings.logo_tagline }}</span>
+        <span class="nav-logo-text">DASSA<span class="accent-dot">.</span></span>
+      </a>
+      <div class="nav-links">
+        {%- if section.settings.menu != blank -%}
+          {%- for link in section.settings.menu.links -%}
+            <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="/#nos-boissons" class="nav-link">Nos boissons</a>
+          <a href="/#nos-cocktails" class="nav-link">Nos cocktails</a>
+          <a href="/#ou-acheter" class="nav-link">Où acheter</a>
+          <a href="/#notre-histoire" class="nav-link">Notre histoire</a>
+          <a href="/#faq" class="nav-link">FAQ</a>
+        {%- endif -%}
+      </div>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" aria-label="Recherche" data-search-toggle>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <a href="{{ routes.account_url }}" class="nav-icon-btn nav-icon-account" aria-label="Compte">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button class="nav-icon-btn nav-cart-btn" aria-label="Panier" data-cart-toggle data-testid="nav-cart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count-badge{% if cart.item_count == 0 %} hidden{% endif %}" data-cart-count>{{ cart.item_count }}</span>
+        </button>
+        <button class="nav-icon-btn nav-burger" aria-label="Menu" data-menu-toggle>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="search-bar hidden" data-search-bar>
+      <form action="{{ routes.search_url }}" method="get">
+        <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" class="search-input">
+      </form>
+    </div>
+    <div class="mobile-menu hidden" data-mobile-menu>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/#nos-boissons" class="mobile-menu-link">Nos boissons</a>
+        <a href="/#nos-cocktails" class="mobile-menu-link">Nos cocktails</a>
+        <a href="/#ou-acheter" class="mobile-menu-link">Où acheter</a>
+        <a href="/#notre-histoire" class="mobile-menu-link">Notre histoire</a>
+        <a href="/#faq" class="mobile-menu-link">FAQ</a>
+      {%- endif -%}
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête DASSA",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Afficher la barre d'annonce", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Texte d'annonce", "default": "🚚 Livraison gratuite dès 40 $ d'achat • Disponible en Menthe & Ananas" },
+    { "type": "text", "id": "logo_tagline", "label": "Tagline du logo", "default": "Bissap Pétillant" },
+    { "type": "link_list", "id": "menu", "label": "Menu de navigation" }
+  ]
+}
+{% endschema %}

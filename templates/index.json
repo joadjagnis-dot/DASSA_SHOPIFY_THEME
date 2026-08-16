@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "hero": { "type": "dassa-hero", "settings": {} },
+    "benefits": {
+      "type": "dassa-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "sparkles", "title": "Pétillante et rafraîchissante", "text": "À savourer très froide avec des glaçons." } },
+        "b2": { "type": "benefit", "settings": { "icon": "flower", "title": "Inspirée du bissap", "text": "Une recette à base d'hibiscus." } },
+        "b3": { "type": "benefit", "settings": { "icon": "party", "title": "Parfaite pour tous vos moments", "text": "Repas, BBQ, apéros, fêtes ou simplement pour le plaisir." } },
+        "b4": { "type": "benefit", "settings": { "icon": "pin", "title": "Disponible près de chez vous", "text": "Retrouvez DASSA dans plusieurs points de vente au Québec." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    },
+    "marquee": { "type": "dassa-marquee", "settings": {} },
+    "products": {
+      "type": "dassa-products",
+      "blocks": {
+        "menthe": { "type": "product_card", "settings": { "card_color": "#5F8A4C", "tagline": "Bissap Pétillant", "display_title": "Hibiscus – Menthe", "description": "Fraîche, aromatique et pétillante.", "cta_label": "Découvrir Menthe", "meta_text": "355 ml · 0 caféine · 0 théine · À servir bien frais" } },
+        "ananas": { "type": "product_card", "settings": { "card_color": "#F6A623", "tagline": "Bissap Pétillant", "display_title": "Hibiscus – Ananas", "description": "Fruitée, tropicale et rafraîchissante.", "cta_label": "Découvrir Ananas", "meta_text": "355 ml · 0 caféine · 0 théine · À servir bien frais" } },
+        "mix": { "type": "product_card", "settings": { "card_color": "#B8322A", "tagline": "Le meilleur des deux", "display_title": "Pack Découverte Mix", "description": "Le meilleur des deux saveurs dans un seul pack.", "cta_label": "Découvrir le Mix", "meta_text": "355 ml · 0 caféine · 0 théine · À servir bien frais", "full_width": true } }
+      },
+      "block_order": ["menthe", "ananas", "mix"],
+      "settings": {}
+    },
+    "cocktails": {
+      "type": "dassa-cocktails",
+      "blocks": {
+        "r1": { "type": "recipe", "settings": { "name": "Mojito Hibiscus", "type": "Mocktail", "time": "5 min", "dassa_used": "DASSA Menthe", "image_fallback": "dassa-cocktail-mojito.jpg", "ingredients": "1 canette DASSA Menthe bien froide\n1/2 lime coupée en quartiers\n8 feuilles de menthe fraîche\nGlaçons", "steps": "Déposez les quartiers de lime et la menthe au fond d'un grand verre.\nPressez légèrement pour libérer les arômes.\nRemplissez le verre de glaçons.\nVersez la canette de DASSA Menthe bien froide.\nMélangez délicatement et garnissez d'un brin de menthe." } },
+        "r2": { "type": "recipe", "settings": { "name": "Tropical DASSA", "type": "Mocktail", "time": "5 min", "dassa_used": "DASSA Ananas", "image_fallback": "dassa-cocktail-tropical.jpg", "ingredients": "1 canette DASSA Ananas bien froide\n2 morceaux d'ananas frais\n1/2 lime\nGlaçons", "steps": "Remplissez un verre de glaçons.\nAjoutez les morceaux d'ananas frais.\nPressez la demi-lime au-dessus du verre.\nVersez la canette de DASSA Ananas.\nGarnissez d'un quartier d'ananas sur le bord du verre." } },
+        "r3": { "type": "recipe", "settings": { "name": "Hibiscus Sunset", "type": "Mocktail", "time": "5 min", "dassa_used": "DASSA Ananas", "image_fallback": "dassa-cocktail-sunset.jpg", "ingredients": "1 canette DASSA Ananas bien froide\n1 tranche d'orange\n1/2 lime\nGlaçons", "steps": "Remplissez un verre à pied de glaçons.\nPressez la demi-lime dans le verre.\nVersez lentement la canette de DASSA Ananas.\nDéposez la tranche d'orange en garniture.\nServez immédiatement, bien frais." } },
+        "r4": { "type": "recipe", "settings": { "name": "Mint Berry", "type": "Mocktail", "time": "5 min", "dassa_used": "DASSA Menthe", "image_fallback": "dassa-cocktail-berry.jpg", "ingredients": "1 canette DASSA Menthe bien froide\n4 fraises coupées en deux\n1/2 lime\n4 feuilles de menthe\nGlaçons", "steps": "Déposez les fraises et la menthe dans un verre.\nPressez la demi-lime au-dessus.\nAjoutez les glaçons.\nVersez la canette de DASSA Menthe.\nMélangez doucement et dégustez." } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": {}
+    },
+    "store_locator": {
+      "type": "dassa-store-locator",
+      "blocks": {
+        "s1": { "type": "store", "settings": { "name": "IGA Extra Coop de Charlesbourg", "address": "1233 boulevard Louis-XIV, Québec, QC G2L 1L9", "city": "Québec", "lat": "46.8623", "lng": "-71.2977", "visible": true } },
+        "s2": { "type": "store", "settings": { "name": "IGA Extra Convivio Chauveau", "address": "2295 avenue Chauveau, Québec, QC G2C 0G7", "city": "Québec", "lat": "46.8501", "lng": "-71.3419", "visible": true } },
+        "s3": { "type": "store", "settings": { "name": "IGA Quartier QB – Coop de Ste-Foy", "address": "2561 chemin des Quatre-Bourgeois, Québec, QC G1V 0G3", "city": "Québec", "lat": "46.7739", "lng": "-71.2917", "visible": true } },
+        "s4": { "type": "store", "settings": { "name": "IGA Lac Beauport", "address": "", "city": "Québec", "lat": "46.9336", "lng": "-71.2886", "visible": false } },
+        "s5": { "type": "store", "settings": { "name": "IGA Supermarché Famille Rousseau Stoneham", "address": "335 chemin du Hibou, Stoneham-et-Tewkesbury, QC G3C 1R9", "city": "Québec", "lat": "46.9787", "lng": "-71.3705", "visible": true } },
+        "s6": { "type": "store", "settings": { "name": "IGA Famille Laflamme", "address": "771 avenue Royale, Beauport, QC G1E 1Z1", "city": "Québec", "lat": "46.8547", "lng": "-71.1936", "visible": true } },
+        "s7": { "type": "store", "settings": { "name": "Restaurant–Épicerie La Calebasse", "address": "969 avenue Myrand, Québec, QC G1V 2T6", "city": "Québec", "lat": "46.7823", "lng": "-71.2662", "visible": true } },
+        "s8": { "type": "store", "settings": { "name": "Saveur d'Afrique – Épicerie Africaine", "address": "1445 chemin Sainte-Foy, Québec, QC G1S 2N7", "city": "Québec", "lat": "46.7938", "lng": "-71.2543", "visible": true } },
+        "s9": { "type": "store", "settings": { "name": "IGA Extra Supermarché Famille Rousseau", "address": "1855 route des Rivières, Lévis, QC G7A 4X8", "city": "Lévis", "lat": "46.7358", "lng": "-71.3610", "visible": true } },
+        "s10": { "type": "store", "settings": { "name": "IGA Extra Veilleux & Filles", "address": "53 route du Président-Kennedy, Lévis, QC G6V 6C7", "city": "Lévis", "lat": "46.8035", "lng": "-71.1773", "visible": true } },
+        "s11": { "type": "store", "settings": { "name": "IGA Convivio Saint-Jean-Chrysostome", "address": "1015 rue du Basilic, Lévis, QC G6Z 3K4", "city": "Lévis", "lat": "46.7223", "lng": "-71.2337", "visible": true } },
+        "s12": { "type": "store", "settings": { "name": "Rest'Actif", "address": "14 route du Président-Kennedy, Lévis, QC G6V 6C2", "city": "Lévis", "lat": "46.8046", "lng": "-71.1790", "visible": true } },
+        "s13": { "type": "store", "settings": { "name": "Marché Kaïa", "address": "4068 rue Saint-Denis, Montréal, QC H2W 2M5", "city": "Montréal", "lat": "45.5265", "lng": "-73.5810", "visible": true } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "s12", "s13"],
+      "settings": {}
+    },
+    "story": { "type": "dassa-story", "settings": {} },
+    "faq": {
+      "type": "dassa-faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Qu'est-ce que le bissap ?", "answer": "Le bissap est une boisson traditionnelle d'Afrique de l'Ouest préparée à partir de fleurs d'hibiscus infusées. DASSA réinvente cette boisson emblématique en version pétillante : une tisane glacée pétillante à l'hibiscus, rafraîchissante et sans caféine." } },
+        "q2": { "type": "question", "settings": { "question": "DASSA contient-elle de la caféine ?", "answer": "Non. DASSA contient 0 caféine. Vous pouvez la savourer à tout moment de la journée." } },
+        "q3": { "type": "question", "settings": { "question": "DASSA contient-elle de la théine ?", "answer": "Non. DASSA contient 0 théine. C'est une infusion d'hibiscus, pas un thé." } },
+        "q4": { "type": "question", "settings": { "question": "Comment servir DASSA ?", "answer": "DASSA se déguste bien froide, idéalement avec des glaçons. Secouez légèrement la canette avant de servir, puis versez dans un grand verre rempli de glace pour une expérience optimale." } },
+        "q5": { "type": "question", "settings": { "question": "Où trouver DASSA ?", "answer": "DASSA est disponible dans plusieurs points de vente au Québec, notamment à Québec, Lévis et Montréal. Consultez notre carte interactive dans la section « Où acheter » pour trouver le point de vente le plus proche de chez vous." } },
+        "q6": { "type": "question", "settings": { "question": "Comment conserver DASSA ?", "answer": "Conservez vos canettes DASSA dans un endroit frais et sec, à l'abri de la lumière directe. Pour une dégustation optimale, placez-les au réfrigérateur avant de servir. Consultez la date « À consommer avant » indiquée sur le haut de la canette." } },
+        "q7": { "type": "question", "settings": { "question": "Puis-je commander DASSA en ligne ?", "answer": "Oui ! Vous pouvez passer commande directement sur notre site. La livraison est gratuite dès 40 $ d'achat. Ajoutez vos packs préférés au panier et complétez votre commande en quelques clics." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"],
+      "settings": {}
+    },
+    "newsletter": { "type": "dassa-newsletter", "settings": {} }
+  },
+  "order": ["hero", "benefits", "marquee", "products", "cocktails", "store_locator", "story", "faq", "newsletter"]
+}

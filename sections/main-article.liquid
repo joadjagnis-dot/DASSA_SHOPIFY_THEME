@@ -1,0 +1,16 @@
+<section class="page-section">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h1 class="section-title">{{ article.title }}</h1>
+      <p class="section-sub">{{ article.published_at | date: "%d %B %Y" }}</p>
+    </div>
+    {% if article.image %}
+      <img src="{{ article.image | image_url: width: 1000 }}" alt="{{ article.title | escape }}" class="article-img" width="1000" height="560">
+    {% endif %}
+    <div class="rte page-content">{{ article.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

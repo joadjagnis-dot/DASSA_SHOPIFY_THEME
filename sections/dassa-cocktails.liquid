@@ -1,0 +1,115 @@
+<section class="cocktails-section grain" id="nos-cocktails">
+  <div class="container">
+    <div class="section-head reveal-on-scroll">
+      <p class="section-kicker kicker-orange">{{ section.settings.kicker }}</p>
+      <h2 class="section-title title-cream">{{ section.settings.title }} <span class="script-accent-orange">{{ section.settings.title_script }}</span></h2>
+      <p class="section-sub sub-cream">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="cocktails-grid">
+      {% for block in section.blocks %}
+        <article class="cocktail-card reveal-on-scroll" {{ block.shopify_attributes }} data-testid="cocktail-card-{{ block.id }}">
+          <div class="cocktail-media">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="600" height="600">
+            {% elsif block.settings.image_fallback != blank %}
+              <img src="{{ block.settings.image_fallback | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="600" height="600">
+            {% endif %}
+          </div>
+          <div class="cocktail-body">
+            <div class="cocktail-meta">
+              <span class="cocktail-type">{{ block.settings.type }}</span>
+              <span class="cocktail-time">⏱ {{ block.settings.time }}</span>
+            </div>
+            <h3 class="cocktail-name">{{ block.settings.name }}</h3>
+            <p class="cocktail-sub">{{ block.settings.dassa_used }}</p>
+            <button class="btn-outline-orange" data-recipe-open="recipe-{{ block.id }}" data-testid="recipe-btn-{{ block.id }}">Voir la recette</button>
+          </div>
+        </article>
+
+        <dialog class="recipe-modal" id="recipe-{{ block.id }}">
+          <div class="recipe-modal-inner">
+            <button class="recipe-close" data-recipe-close aria-label="Fermer">✕</button>
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.name | escape }}" class="recipe-img" width="800" height="400">
+            {% elsif block.settings.image_fallback != blank %}
+              <img src="{{ block.settings.image_fallback | asset_url }}" alt="{{ block.settings.name | escape }}" class="recipe-img" width="800" height="400">
+            {% endif %}
+            <div class="recipe-content">
+              <div class="cocktail-meta">
+                <span class="cocktail-type">{{ block.settings.type }}</span>
+                <span class="cocktail-time-dark">⏱ {{ block.settings.time }}</span>
+              </div>
+              <h3 class="recipe-title">{{ block.settings.name }}</h3>
+              <p class="recipe-dassa">🥤 Préparé avec {{ block.settings.dassa_used }}</p>
+              <div class="recipe-cols">
+                <div>
+                  <h4>Ingrédients</h4>
+                  <ul>
+                    {% assign ingredients = block.settings.ingredients | newline_to_br | split: '<br />' %}
+                    {% for ing in ingredients %}<li><span class="star-orange">✺</span> {{ ing | strip }}</li>{% endfor %}
+                  </ul>
+                </div>
+                <div>
+                  <h4>Étapes</h4>
+                  <ol>
+                    {% assign steps = block.settings.steps | newline_to_br | split: '<br />' %}
+                    {% for step in steps %}<li><span class="step-num">{{ forloop.index }}</span> {{ step | strip }}</li>{% endfor %}
+                  </ol>
+                </div>
+              </div>
+              {% if block.settings.product != blank %}
+                <a href="{{ block.settings.product.url }}" class="btn btn-red recipe-cta">Découvrir cette saveur →</a>
+              {% else %}
+                <a href="/#nos-boissons" class="btn btn-red recipe-cta">Découvrir cette saveur →</a>
+              {% endif %}
+            </div>
+          </div>
+        </dialog>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cocktails DASSA",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "02 — Nos cocktails" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "DASSA" },
+    { "type": "text", "id": "title_script", "label": "Titre manuscrit", "default": "se mélange aussi." },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Découvrez des cocktails et mocktails simples à préparer avec DASSA." }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "recipe",
+      "name": "Recette",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Mojito Hibiscus" },
+        { "type": "select", "id": "type", "label": "Type", "options": [
+          { "value": "Mocktail", "label": "Mocktail" },
+          { "value": "Cocktail", "label": "Cocktail" }
+        ], "default": "Mocktail" },
+        { "type": "text", "id": "time", "label": "Temps", "default": "5 min" },
+        { "type": "text", "id": "dassa_used", "label": "DASSA utilisé", "default": "DASSA Menthe" },
+        { "type": "product", "id": "product", "label": "Produit lié (CTA)" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_fallback", "label": "Asset image par défaut (nom de fichier)", "default": "dassa-cocktail-mojito.jpg" },
+        { "type": "textarea", "id": "ingredients", "label": "Ingrédients (un par ligne)", "default": "1 canette DASSA Menthe bien froide\n1/2 lime coupée en quartiers\n8 feuilles de menthe fraîche\nGlaçons" },
+        { "type": "textarea", "id": "steps", "label": "Étapes (une par ligne)", "default": "Déposez les quartiers de lime et la menthe au fond d'un grand verre.\nPressez légèrement pour libérer les arômes.\nRemplissez le verre de glaçons.\nVersez la canette de DASSA Menthe bien froide.\nMélangez délicatement et garnissez d'un brin de menthe." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cocktails DASSA",
+      "blocks": [
+        { "type": "recipe", "settings": { "name": "Mojito Hibiscus", "dassa_used": "DASSA Menthe", "image_fallback": "dassa-cocktail-mojito.jpg", "ingredients": "1 canette DASSA Menthe bien froide\n1/2 lime coupée en quartiers\n8 feuilles de menthe fraîche\nGlaçons", "steps": "Déposez les quartiers de lime et la menthe au fond d'un grand verre.\nPressez légèrement pour libérer les arômes.\nRemplissez le verre de glaçons.\nVersez la canette de DASSA Menthe bien froide.\nMélangez délicatement et garnissez d'un brin de menthe." } },
+        { "type": "recipe", "settings": { "name": "Tropical DASSA", "dassa_used": "DASSA Ananas", "image_fallback": "dassa-cocktail-tropical.jpg", "ingredients": "1 canette DASSA Ananas bien froide\n2 morceaux d'ananas frais\n1/2 lime\nGlaçons", "steps": "Remplissez un verre de glaçons.\nAjoutez les morceaux d'ananas frais.\nPressez la demi-lime au-dessus du verre.\nVersez la canette de DASSA Ananas.\nGarnissez d'un quartier d'ananas sur le bord du verre." } },
+        { "type": "recipe", "settings": { "name": "Hibiscus Sunset", "dassa_used": "DASSA Ananas", "image_fallback": "dassa-cocktail-sunset.jpg", "ingredients": "1 canette DASSA Ananas bien froide\n1 tranche d'orange\n1/2 lime\nGlaçons", "steps": "Remplissez un verre à pied de glaçons.\nPressez la demi-lime dans le verre.\nVersez lentement la canette de DASSA Ananas.\nDéposez la tranche d'orange en garniture.\nServez immédiatement, bien frais." } },
+        { "type": "recipe", "settings": { "name": "Mint Berry", "dassa_used": "DASSA Menthe", "image_fallback": "dassa-cocktail-berry.jpg", "ingredients": "1 canette DASSA Menthe bien froide\n4 fraises coupées en deux\n1/2 lime\n4 feuilles de menthe\nGlaçons", "steps": "Déposez les fraises et la menthe dans un verre.\nPressez la demi-lime au-dessus.\nAjoutez les glaçons.\nVersez la canette de DASSA Menthe.\nMélangez doucement et dégustez." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

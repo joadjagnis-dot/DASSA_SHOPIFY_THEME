@@ -1,0 +1,36 @@
+<section class="story-section" id="notre-histoire">
+  <div class="container story-grid">
+    <div class="story-media reveal-on-scroll">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="Moments DASSA entre amis" loading="lazy" class="story-img" width="1000" height="1250">
+      {% else %}
+        <img src="{{ 'dassa-story.webp' | asset_url }}" alt="Moments DASSA entre amis" loading="lazy" class="story-img" width="1000" height="1250">
+      {% endif %}
+      <span class="story-sticker">{{ section.settings.sticker_text }}</span>
+    </div>
+    <div class="story-content reveal-on-scroll">
+      <p class="section-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+      <p class="story-text">{{ section.settings.text }}</p>
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link | default: '#notre-histoire' }}" class="btn btn-dark" data-testid="story-cta">{{ section.settings.cta_label }} →</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Notre histoire DASSA",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "04 — Notre histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Une boisson pensée pour vos meilleurs moments." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "DASSA est née d'une passion : faire découvrir le bissap, la boisson emblématique à l'hibiscus, dans une version pétillante et moderne, préparée au Québec. Chaque canette est pensée pour accompagner vos repas, vos BBQ, vos apéros et tous les moments qui comptent." },
+    { "type": "image_picker", "id": "image", "label": "Photo lifestyle (défaut : asset du thème)" },
+    { "type": "text", "id": "sticker_text", "label": "Texte du sticker", "default": "Vos meilleurs moments ✺" },
+    { "type": "text", "id": "cta_label", "label": "Texte du CTA", "default": "Découvrir notre histoire" },
+    { "type": "url", "id": "cta_link", "label": "Lien du CTA" }
+  ],
+  "presets": [{ "name": "Notre histoire DASSA" }]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+<section class="faq-section" id="faq">
+  <div class="container-narrow">
+    <div class="section-head reveal-on-scroll">
+      <p class="section-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section-title">{{ section.settings.title }} <span class="script-accent-red">{{ section.settings.title_script }}</span></h2>
+    </div>
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        <details class="faq-item" {{ block.shopify_attributes }} data-testid="faq-item-{{ forloop.index0 }}">
+          <summary class="faq-question">{{ block.settings.question }}<span class="faq-chevron">⌄</span></summary>
+          <div class="faq-answer">{{ block.settings.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ DASSA",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "05 — FAQ" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Questions" },
+    { "type": "text", "id": "title_script", "label": "Titre manuscrit", "default": "fréquentes." }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Réponse" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ DASSA",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Qu'est-ce que le bissap ?", "answer": "Le bissap est une boisson traditionnelle d'Afrique de l'Ouest préparée à partir de fleurs d'hibiscus infusées. DASSA réinvente cette boisson emblématique en version pétillante : une tisane glacée pétillante à l'hibiscus, rafraîchissante et sans caféine." } },
+        { "type": "question", "settings": { "question": "DASSA contient-elle de la caféine ?", "answer": "Non. DASSA contient 0 caféine. Vous pouvez la savourer à tout moment de la journée." } },
+        { "type": "question", "settings": { "question": "DASSA contient-elle de la théine ?", "answer": "Non. DASSA contient 0 théine. C'est une infusion d'hibiscus, pas un thé." } },
+        { "type": "question", "settings": { "question": "Comment servir DASSA ?", "answer": "DASSA se déguste bien froide, idéalement avec des glaçons. Secouez légèrement la canette avant de servir, puis versez dans un grand verre rempli de glace pour une expérience optimale." } },
+        { "type": "question", "settings": { "question": "Où trouver DASSA ?", "answer": "DASSA est disponible dans plusieurs points de vente au Québec, notamment à Québec, Lévis et Montréal. Consultez notre carte interactive dans la section « Où acheter » pour trouver le point de vente le plus proche de chez vous." } },
+        { "type": "question", "settings": { "question": "Comment conserver DASSA ?", "answer": "Conservez vos canettes DASSA dans un endroit frais et sec, à l'abri de la lumière directe. Pour une dégustation optimale, placez-les au réfrigérateur avant de servir. Consultez la date « À consommer avant » indiquée sur le haut de la canette." } },
+        { "type": "question", "settings": { "question": "Puis-je commander DASSA en ligne ?", "answer": "Oui ! Vous pouvez passer commande directement sur notre site. La livraison est gratuite dès 40 $ d'achat. Ajoutez vos packs préférés au panier et complétez votre commande en quelques clics." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

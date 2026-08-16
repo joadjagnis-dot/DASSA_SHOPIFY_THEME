@@ -1,0 +1,36 @@
+{
+  "general": {
+    "cart": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide",
+      "checkout": "Passer la commande",
+      "total": "Total",
+      "shipping": "Livraison",
+      "shipping_at_checkout": "Calculée au paiement",
+      "free_shipping": "Gratuite",
+      "continue": "Découvrir nos boissons"
+    },
+    "search": {
+      "placeholder": "Rechercher : Menthe, Ananas, cocktails…",
+      "results": "Résultats pour « {{ terms }} »",
+      "no_results": "Aucun résultat trouvé."
+    },
+    "404": {
+      "title": "Page introuvable",
+      "subtitle": "Cette page s'est évaporée comme des bulles de bissap.",
+      "back": "Retour à l'accueil"
+    },
+    "newsletter": {
+      "success": "Bienvenue dans l'univers DASSA !"
+    },
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "quantity": "Quantité"
+    },
+    "password": {
+      "title": "Bientôt disponible",
+      "subtitle": "L'univers DASSA arrive très vite."
+    }
+  }
+}

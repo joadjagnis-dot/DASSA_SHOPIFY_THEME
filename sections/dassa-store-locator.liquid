@@ -1,0 +1,96 @@
+<section class="locator-section" id="ou-acheter">
+  <div class="container">
+    <div class="section-head reveal-on-scroll">
+      <p class="section-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section-title">{{ section.settings.title }} <span class="script-accent-red">{{ section.settings.title_script }}</span></h2>
+      <p class="section-sub">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="locator-controls">
+      <div class="locator-search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Ville ou code postal…" data-store-search data-testid="store-search-input">
+      </div>
+      <button class="btn btn-red" data-store-locate data-testid="store-locate-btn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+        Ma position
+      </button>
+    </div>
+
+    <div class="locator-filters" data-city-filters>
+      <button class="city-pill active" data-city="Toutes">Toutes</button>
+      <button class="city-pill" data-city="Québec">Québec</button>
+      <button class="city-pill" data-city="Lévis">Lévis</button>
+      <button class="city-pill" data-city="Montréal">Montréal</button>
+    </div>
+
+    <div class="locator-grid">
+      <div class="locator-map" id="dassa-map"></div>
+      <div class="locator-list" data-store-list data-testid="store-list"></div>
+    </div>
+  </div>
+
+  <script type="application/json" data-stores-json>
+    [
+      {% for block in section.blocks %}
+        {% if block.settings.visible %}
+        {
+          "id": {{ block.id | json }},
+          "name": {{ block.settings.name | json }},
+          "address": {{ block.settings.address | json }},
+          "city": {{ block.settings.city | json }},
+          "lat": {{ block.settings.lat | default: 0 }},
+          "lng": {{ block.settings.lng | default: 0 }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endif %}
+      {% endfor %}
+    ]
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Store Locator DASSA",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "03 — Où acheter" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Trouvez DASSA" },
+    { "type": "text", "id": "title_script", "label": "Titre manuscrit", "default": "près de chez vous." },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Entrez votre ville ou votre code postal pour trouver le point de vente DASSA le plus proche." }
+  ],
+  "max_blocks": 50,
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Point de vente",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom du magasin" },
+        { "type": "text", "id": "address", "label": "Adresse complète" },
+        { "type": "text", "id": "city", "label": "Ville (Québec, Lévis ou Montréal)", "default": "Québec" },
+        { "type": "text", "id": "lat", "label": "Latitude" },
+        { "type": "text", "id": "lng", "label": "Longitude" },
+        { "type": "checkbox", "id": "visible", "label": "Visible publiquement", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Locator DASSA",
+      "blocks": [
+        { "type": "store", "settings": { "name": "IGA Extra Coop de Charlesbourg", "address": "1233 boulevard Louis-XIV, Québec, QC G2L 1L9", "city": "Québec", "lat": "46.8623", "lng": "-71.2977" } },
+        { "type": "store", "settings": { "name": "IGA Extra Convivio Chauveau", "address": "2295 avenue Chauveau, Québec, QC G2C 0G7", "city": "Québec", "lat": "46.8501", "lng": "-71.3419" } },
+        { "type": "store", "settings": { "name": "IGA Quartier QB – Coop de Ste-Foy", "address": "2561 chemin des Quatre-Bourgeois, Québec, QC G1V 0G3", "city": "Québec", "lat": "46.7739", "lng": "-71.2917" } },
+        { "type": "store", "settings": { "name": "IGA Lac Beauport", "address": "", "city": "Québec", "lat": "46.9336", "lng": "-71.2886", "visible": false } },
+        { "type": "store", "settings": { "name": "IGA Supermarché Famille Rousseau Stoneham", "address": "335 chemin du Hibou, Stoneham-et-Tewkesbury, QC G3C 1R9", "city": "Québec", "lat": "46.9787", "lng": "-71.3705" } },
+        { "type": "store", "settings": { "name": "IGA Famille Laflamme", "address": "771 avenue Royale, Beauport, QC G1E 1Z1", "city": "Québec", "lat": "46.8547", "lng": "-71.1936" } },
+        { "type": "store", "settings": { "name": "Restaurant–Épicerie La Calebasse", "address": "969 avenue Myrand, Québec, QC G1V 2T6", "city": "Québec", "lat": "46.7823", "lng": "-71.2662" } },
+        { "type": "store", "settings": { "name": "Saveur d'Afrique – Épicerie Africaine", "address": "1445 chemin Sainte-Foy, Québec, QC G1S 2N7", "city": "Québec", "lat": "46.7938", "lng": "-71.2543" } },
+        { "type": "store", "settings": { "name": "IGA Extra Supermarché Famille Rousseau", "address": "1855 route des Rivières, Lévis, QC G7A 4X8", "city": "Lévis", "lat": "46.7358", "lng": "-71.3610" } },
+        { "type": "store", "settings": { "name": "IGA Extra Veilleux & Filles", "address": "53 route du Président-Kennedy, Lévis, QC G6V 6C7", "city": "Lévis", "lat": "46.8035", "lng": "-71.1773" } },
+        { "type": "store", "settings": { "name": "IGA Convivio Saint-Jean-Chrysostome", "address": "1015 rue du Basilic, Lévis, QC G6Z 3K4", "city": "Lévis", "lat": "46.7223", "lng": "-71.2337" } },
+        { "type": "store", "settings": { "name": "Rest'Actif", "address": "14 route du Président-Kennedy, Lévis, QC G6V 6C2", "city": "Lévis", "lat": "46.8046", "lng": "-71.1790" } },
+        { "type": "store", "settings": { "name": "Marché Kaïa", "address": "4068 rue Saint-Denis, Montréal, QC H2W 2M5", "city": "Montréal", "lat": "45.5265", "lng": "-73.5810" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

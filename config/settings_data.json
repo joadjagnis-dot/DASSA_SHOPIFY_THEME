@@ -1,0 +1,10 @@
+{
+  "current": {
+    "color_red": "#B8322A",
+    "color_green": "#5F8A4C",
+    "color_orange": "#F6A623",
+    "color_cream": "#FFF7ED",
+    "color_brown": "#2C211D",
+    "free_shipping_threshold": 40
+  }
+}

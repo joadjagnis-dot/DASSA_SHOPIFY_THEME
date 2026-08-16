@@ -1,0 +1,109 @@
+<section class="products-section" id="nos-boissons">
+  <div class="container">
+    <div class="section-head reveal-on-scroll">
+      <p class="section-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section-title">{{ section.settings.title }} <span class="script-accent-red">{{ section.settings.title_script }}</span></h2>
+    </div>
+    <div class="products-grid">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        {% if product == blank %}
+          <article class="product-card grain{% if block.settings.full_width %} product-card-wide{% endif %}" style="background-color: {{ block.settings.card_color }};" {{ block.shopify_attributes }}>
+            <div class="condensation"></div>
+            <div class="product-card-inner{% if block.settings.full_width %} product-card-inner-row{% endif %}">
+              <div class="product-card-media">
+                {% if block.settings.card_color == '#F6A623' %}
+                  <img src="{{ 'dassa-can-ananas.png' | asset_url }}" alt="Canette DASSA" loading="lazy" class="product-can float-slow" width="425" height="1000">
+                {% else %}
+                  <img src="{{ 'dassa-can-menthe.png' | asset_url }}" alt="Canette DASSA" loading="lazy" class="product-can float-slow" width="425" height="1000">
+                {% endif %}
+              </div>
+              <div class="product-card-content">
+                <p class="product-card-script">{{ block.settings.tagline }}</p>
+                <h3 class="product-card-title">{{ block.settings.display_title | default: 'Produit DASSA' }}</h3>
+                <p class="product-card-desc">{{ block.settings.description }}</p>
+                <p class="product-card-meta">⚠ Sélectionnez un produit Shopify pour ce bloc dans l'éditeur de thème afin d'afficher les formats, prix et l'ajout au panier.</p>
+              </div>
+            </div>
+          </article>
+        {% else %}
+          <article class="product-card grain reveal-on-scroll{% if block.settings.full_width %} product-card-wide{% endif %}" style="background-color: {{ block.settings.card_color }};" {{ block.shopify_attributes }} data-testid="product-card-{{ product.handle }}">
+            <div class="condensation"></div>
+            <div class="product-card-inner{% if block.settings.full_width %} product-card-inner-row{% endif %}">
+              <div class="product-card-media">
+                <a href="{{ product.url }}">
+                  {% if block.settings.image %}
+                    <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-can float-slow" width="600" height="600">
+                  {% elsif product.featured_image %}
+                    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-can float-slow" width="600" height="600">
+                  {% endif %}
+                </a>
+              </div>
+              <div class="product-card-content">
+                <p class="product-card-script">{{ block.settings.tagline }}</p>
+                <h3 class="product-card-title"><a href="{{ product.url }}">{{ block.settings.display_title | default: product.title }}</a></h3>
+                <p class="product-card-desc">{{ block.settings.description | default: product.description | strip_html | truncate: 90 }}</p>
+
+                <div class="pack-selector" role="group" aria-label="Choisir un format">
+                  {% for variant in product.variants %}
+                    <label class="pack-pill">
+                      <input type="radio" name="variant-{{ section.id }}-{{ block.id }}" value="{{ variant.id }}" data-price="{{ variant.price | money }}" {% if forloop.first %}checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                      <span>{{ variant.title }} · {{ variant.price | money }}</span>
+                    </label>
+                  {% endfor %}
+                </div>
+
+                <div class="product-card-actions">
+                  <button class="btn btn-dark add-to-cart-btn" data-add-to-cart data-testid="add-to-cart-{{ product.handle }}" {% unless product.available %}disabled{% endunless %}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    {% if product.available %}{{ block.settings.cta_label | default: 'Ajouter au panier' }} — <span data-price-display>{{ product.variants.first.price | money }}</span>{% else %}{{ 'general.product.sold_out' | t }}{% endif %}
+                  </button>
+                </div>
+                <p class="product-card-meta">{{ block.settings.meta_text }}</p>
+              </div>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nos boissons DASSA",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "01 — Nos boissons" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Deux saveurs." },
+    { "type": "text", "id": "title_script", "label": "Titre manuscrit", "default": "Une signature DASSA." }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Carte produit",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produit Shopify" },
+        { "type": "color", "id": "card_color", "label": "Couleur de fond", "default": "#5F8A4C" },
+        { "type": "text", "id": "tagline", "label": "Sur-titre manuscrit", "default": "Bissap Pétillant" },
+        { "type": "text", "id": "display_title", "label": "Titre affiché (optionnel, sinon titre produit)" },
+        { "type": "text", "id": "description", "label": "Description courte (optionnel)" },
+        { "type": "image_picker", "id": "image", "label": "Image canette (optionnel, sinon image produit)" },
+        { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Découvrir" },
+        { "type": "text", "id": "meta_text", "label": "Texte méta", "default": "355 ml · 0 caféine · 0 théine · À servir bien frais" },
+        { "type": "checkbox", "id": "full_width", "label": "Carte pleine largeur (pack mix)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nos boissons DASSA",
+      "blocks": [
+        { "type": "product_card", "settings": { "card_color": "#5F8A4C", "cta_label": "Découvrir Menthe" } },
+        { "type": "product_card", "settings": { "card_color": "#F6A623", "cta_label": "Découvrir Ananas" } },
+        { "type": "product_card", "settings": { "card_color": "#B8322A", "cta_label": "Découvrir le Mix", "full_width": true, "tagline": "Le meilleur des deux" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

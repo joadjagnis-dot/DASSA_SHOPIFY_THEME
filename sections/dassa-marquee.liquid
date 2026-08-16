@@ -1,0 +1,25 @@
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {% assign items = section.settings.items | split: ',' %}
+    {% for i in (1..2) %}
+      <div class="marquee-half">
+        {% for item in items %}
+          <span class="marquee-item"><span class="marquee-text">{{ item | strip }}</span><span class="marquee-star">✺</span></span>
+        {% endfor %}
+        {% for item in items %}
+          <span class="marquee-item"><span class="marquee-text">{{ item | strip }}</span><span class="marquee-star">✺</span></span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee DASSA",
+  "settings": [
+    { "type": "text", "id": "items", "label": "Éléments (séparés par des virgules)", "default": "Bissap Pétillant, 0 Caféine, 0 Théine, 355 ml, À servir bien frais, Hibiscus, Menthe, Ananas" }
+  ],
+  "presets": [{ "name": "Marquee DASSA" }]
+}
+{% endschema %}

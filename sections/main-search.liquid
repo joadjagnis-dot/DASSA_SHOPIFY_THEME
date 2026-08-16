@@ -1,0 +1,33 @@
+<section class="page-section">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h1 class="section-title">{{ 'general.search.results' | t: terms: search.terms }}</h1>
+    </div>
+    <form action="{{ routes.search_url }}" method="get" class="search-page-form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="search-input">
+    </form>
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <p class="section-sub">{{ 'general.search.no_results' | t }}</p>
+      {% endif %}
+      <div class="collection-grid">
+        {% paginate search.results by 12 %}
+          {% for item in search.results %}
+            <a href="{{ item.url }}" class="collection-card">
+              {% if item.featured_image %}
+                <img src="{{ item.featured_image | image_url: width: 500 }}" alt="{{ item.title | escape }}" loading="lazy" width="500" height="500">
+              {% endif %}
+              <h3>{{ item.title }}</h3>
+              {% if item.price %}<p class="collection-price">{{ item.price | money }}</p>{% endif %}
+            </a>
+          {% endfor %}
+          {% if paginate.pages > 1 %}<div class="pagination">{{ paginate | default_pagination }}</div>{% endif %}
+        {% endpaginate %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Recherche", "settings": [] }
+{% endschema %}
