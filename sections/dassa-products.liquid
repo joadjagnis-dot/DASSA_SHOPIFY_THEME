@@ -28,7 +28,7 @@
           </article>
         {% else %}
           <article
-            class="product-card grain reveal-on-scroll{% if block.settings.full_width %} product-card-wide{% endif %}"
+            class="product-card grain{% if block.settings.full_width %} product-card-wide{% endif %}"
             style="background-color: {{ block.settings.card_color }};"
             {{ block.shopify_attributes }}
           >
