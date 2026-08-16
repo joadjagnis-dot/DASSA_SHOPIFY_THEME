@@ -302,6 +302,7 @@ button { font-family: inherit; cursor: pointer; }
 .pack-pill-dark span { border-color: rgba(44,33,29,0.3); color: var(--brown); }
 .pack-pill-dark input:checked + span { background: var(--brown); color: var(--cream); border-color: var(--brown); }
 .product-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.product-card-price { font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; color: var(--cream); margin: 0 0 0.75rem; }
 .product-card-actions .btn { padding: 0.875rem 1.75rem; }
 .product-card-meta { font-size: 0.75rem; color: rgba(255,247,237,0.7); margin: 1rem 0 0; }
 .meta-dark { color: rgba(44,33,29,0.6); }

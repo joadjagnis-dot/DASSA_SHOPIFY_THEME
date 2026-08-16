@@ -31,13 +31,15 @@
             class="product-card grain{% if block.settings.full_width %} product-card-wide{% endif %}"
             style="background-color: {{ block.settings.card_color }};"
             {{ block.shopify_attributes }}
+            data-testid="product-card-{{ card_product.handle }}"
           >
-            <div class="product-card-inner">
+            <div class="condensation"></div>
+            <div class="product-card-inner{% if block.settings.full_width %} product-card-inner-row{% endif %}">
               <div class="product-card-media">
                 {% if block.settings.image != blank %}
                   {{
                     block.settings.image
-                    | image_url: width: 600
+                    | image_url: width: 700
                     | image_tag:
                       loading: 'lazy',
                       class: 'product-can float-slow'
@@ -45,7 +47,7 @@
                 {% elsif card_product.featured_image != blank %}
                   {{
                     card_product.featured_image
-                    | image_url: width: 600
+                    | image_url: width: 700
                     | image_tag:
                       loading: 'lazy',
                       class: 'product-can float-slow'
@@ -53,21 +55,46 @@
                 {% endif %}
               </div>
               <div class="product-card-content">
-                <p class="product-card-script">
-                  {{ block.settings.tagline }}
-                </p>
-                <h3 class="product-card-title">
-                  {{ block.settings.display_title | default: card_product.title }}
-                </h3>
-                <p class="product-card-desc">
-                  {{ block.settings.description | default: card_product.description | strip_html | truncate: 90 }}
-                </p>
-                <p>
-                  Prix : {{ card_product.price | money }}
-                </p>
-                <a href="{{ card_product.url }}" class="btn btn-dark">
-                  Voir le produit
-                </a>
+                <p class="product-card-script">{{ block.settings.tagline }}</p>
+                <h3 class="product-card-title">{{ block.settings.display_title | default: card_product.title }}</h3>
+                <p class="product-card-desc">{{ block.settings.description | default: card_product.description | strip_html | truncate: 90 }}</p>
+
+                {% if card_product.variants.size > 1 %}
+                  <div class="pack-selector" role="group" aria-label="Choisir un format">
+                    {% for variant in card_product.variants %}
+                      <label class="pack-pill">
+                        <input
+                          type="radio"
+                          name="variant-{{ section.id }}-{{ block.id }}"
+                          value="{{ variant.id }}"
+                          data-price="{{ variant.price | money }}"
+                          {% if variant.id == card_product.selected_or_first_available_variant.id %}checked{% endif %}
+                          {% unless variant.available %}disabled{% endunless %}
+                        >
+                        <span>{{ variant.title }} · {{ variant.price | money }}</span>
+                      </label>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <input
+                    type="radio"
+                    name="variant-{{ section.id }}-{{ block.id }}"
+                    value="{{ card_product.selected_or_first_available_variant.id }}"
+                    data-price="{{ card_product.selected_or_first_available_variant.price | money }}"
+                    checked
+                    hidden
+                  >
+                {% endif %}
+
+                <p class="product-card-price"><span data-price-display>{{ card_product.selected_or_first_available_variant.price | money }}</span></p>
+
+                <div class="product-card-actions">
+                  <button type="button" class="btn btn-dark add-to-cart-btn" data-add-to-cart data-testid="add-to-cart-{{ card_product.handle }}" {% unless card_product.available %}disabled{% endunless %}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    {% if card_product.available %}Ajouter au panier — <span data-price-display>{{ card_product.selected_or_first_available_variant.price | money }}</span>{% else %}{{ 'general.product.sold_out' | t }}{% endif %}
+                  </button>
+                </div>
+                <p class="product-card-meta">{{ block.settings.meta_text }}</p>
               </div>
             </div>
           </article>

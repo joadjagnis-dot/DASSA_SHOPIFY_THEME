@@ -146,22 +146,19 @@
     openCart();
   }
 
-  /* ---------- Product cards : pack selector + add to cart ---------- */
-  document.querySelectorAll(".product-card").forEach((card) => {
-    const radios = card.querySelectorAll('input[type="radio"]');
-    const priceDisplay = card.querySelector("[data-price-display]");
-    radios.forEach((r) =>
-      r.addEventListener("change", () => {
-        if (priceDisplay) priceDisplay.textContent = r.dataset.price;
-      })
-    );
-    const btn = card.querySelector("[data-add-to-cart]");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const checked = card.querySelector('input[type="radio"]:checked');
-        if (checked) addToCart(checked.value, 1);
-      });
-    }
+  /* ---------- Product cards : pack selector + add to cart (délégation : survit aux re-renders du Theme Editor) ---------- */
+  document.addEventListener("change", (e) => {
+    if (!e.target.matches('.product-card input[type="radio"]')) return;
+    const card = e.target.closest(".product-card");
+    card.querySelectorAll("[data-price-display]").forEach((el) => {
+      el.textContent = e.target.dataset.price;
+    });
+  });
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".product-card [data-add-to-cart]");
+    if (!btn) return;
+    const checked = btn.closest(".product-card").querySelector('input[type="radio"]:checked');
+    if (checked) addToCart(checked.value, 1);
   });
 
   /* ---------- PDP : variant price update + AJAX add ---------- */
