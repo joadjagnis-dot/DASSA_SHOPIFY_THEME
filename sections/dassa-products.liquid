@@ -68,6 +68,8 @@
                           name="variant-{{ section.id }}-{{ block.id }}"
                           value="{{ variant.id }}"
                           data-price="{{ variant.price | money }}"
+                          data-variant-image="{% if variant.featured_image %}{{ variant.featured_image | image_url: width: 700 }}{% endif %}"
+                          data-variant-available="{{ variant.available }}"
                           {% if variant.id == card_product.selected_or_first_available_variant.id %}checked{% endif %}
                           {% unless variant.available %}disabled{% endunless %}
                         >

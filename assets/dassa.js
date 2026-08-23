@@ -153,6 +153,21 @@
     card.querySelectorAll("[data-price-display]").forEach((el) => {
       el.textContent = e.target.dataset.price;
     });
+    // Image de la variante (source de vérité : variant.featured_image côté Liquid)
+    const variantImage = e.target.dataset.variantImage;
+    if (variantImage) {
+      const img = card.querySelector(".product-card-media img");
+      if (img && img.src !== variantImage) {
+        img.src = variantImage;
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+      }
+    }
+    // Disponibilité de la variante -> état du bouton Ajouter au panier
+    if (e.target.dataset.variantAvailable) {
+      const addBtn = card.querySelector("[data-add-to-cart]");
+      if (addBtn) addBtn.disabled = e.target.dataset.variantAvailable !== "true";
+    }
   });
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".product-card [data-add-to-cart]");
