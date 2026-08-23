@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_red": "#B8322A",
@@ -5,6 +14,33 @@
     "color_orange": "#F6A623",
     "color_cream": "#FFF7ED",
     "color_brown": "#2C211D",
-    "free_shipping_threshold": 40
+    "free_shipping_threshold": 40,
+    "sections": {
+      "dassa-header": {
+        "type": "dassa-header",
+        "settings": {
+          "show_announcement": true,
+          "announcement_text": "🚚 Livraison gratuite dès 40 $ d'achat • Disponible en Menthe & Ananas",
+          "logo_tagline": "Bissap Pétillant",
+          "menu": ""
+        }
+      },
+      "dassa-footer": {
+        "type": "dassa-footer",
+        "settings": {
+          "tagline": "Bissap Pétillant",
+          "description": "La tisane glacée pétillante à l'hibiscus. 0 caféine, 0 théine, à servir bien frais.",
+          "col1_title": "Découvrir",
+          "col1_menu": "",
+          "col2_title": "Aide",
+          "col2_menu": "",
+          "legal_menu": "",
+          "instagram_url": "https://www.instagram.com/dassaqc?igsi=aWF2d3h1ejh2MHp2",
+          "facebook_url": "https://www.facebook.com/share/18CMXyPCeh/?mibextid=wwXIfr",
+          "tiktok_url": "https://www.tiktok.com/@buvezdassa?_r=1&_t=ZS-998AdiftrsI"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
